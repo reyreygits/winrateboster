@@ -168,7 +168,7 @@
       </div>
 
       <div class="cta">
-        <button id="activateBtn" class="btn">CEK WINRATE BY IP </button>
+        <button id="activateBtn" class="btn">CEK WINRATE BY IP</button>
       </div>
     </div>
 
@@ -220,7 +220,8 @@
       animateTo(target);
       active=true;
       statusText.textContent="Aktif ("+target+"%)";
-      activateBtn.textContent="AKTIF";
+      // ubah tombol jadi LOGIN SEKARANG
+      activateBtn.textContent="AKTIFKAN WINRATE DAN LOGIN SEKARANG";
       activateBtn.disabled=false;
     },700);
   }
@@ -231,7 +232,7 @@
     percentEl.textContent="0%";
     active=false;
     statusText.textContent="Non aktif";
-    activateBtn.textContent="AKTIFKAN WINRATE";
+    activateBtn.textContent="CEK WINRATE BY IP";
   }
 })();
 </script>
