@@ -84,6 +84,13 @@ body{
   font-size:13px;color:var(--muted);margin-top:6px;
 }
 
+.user-id-display{
+  font-size:14px;
+  color:var(--muted);
+  margin-top:6px;
+  word-break: break-word;
+}
+
 @keyframes glow{
   from{text-shadow:0 0 6px rgba(0,212,255,0.5);}
   to{text-shadow:0 0 16px rgba(255,216,89,0.7);}
@@ -164,19 +171,20 @@ body{
 /* === RESPONSIVE MOBILE === */
 @media (max-width:480px){
   .visual{
-    width:150px;
-    height:150px;
+    width:100%;   /* kotak bar full lebar */
+    height:180px;
     padding:15px;
-    justify-content:space-evenly; /* jarak bar lebih merata */
+    justify-content:space-evenly;
   }
   .bar{
-    width:16px;
+    width:18px;
     border-radius:6px;
   }
   .big-percent{
     font-size:36px;
   }
   .percent-wrap{
+    width:100%;
     padding:15px;
   }
   .center-area{
@@ -185,6 +193,10 @@ body{
   }
   .cta{
     width:100%;
+  }
+  .user-id-display{
+    margin-top:6px;
+    font-size:14px;
   }
 }
 </style>
@@ -196,10 +208,11 @@ body{
 
   <div class="center-area">
     <div class="percent-wrap">
-      <input type="text" id="userIdInput" placeholder="Masukkan User ID" 
-             style="width:90%;padding:6px 10px;border-radius:8px;border:none;margin-bottom:10px;text-align:center;font-size:14px;">
       <div class="big-percent" id="percent">0%</div>
       <div class="percent-label">Persentase peningkatan</div>
+      <div class="user-id-display" id="userIdDisplay">User ID akan tampil di sini</div>
+      <input type="text" id="userIdInput" placeholder="Masukkan User ID" 
+             style="width:90%;padding:6px 10px;border-radius:8px;border:none;margin-top:10px;text-align:center;font-size:14px;">
     </div>
 
     <div class="visual">
@@ -233,6 +246,7 @@ body{
   const statusText = document.getElementById("statusText");
   const resetBtn = document.getElementById("resetBtn");
   const userIdInput = document.getElementById("userIdInput");
+  const userIdDisplay = document.getElementById("userIdDisplay");
 
   const minTarget=75, maxTarget=85, duration=2000;
   let active=false, timer=null;
@@ -247,7 +261,7 @@ body{
       const t=Math.min(1,(Date.now()-startTime)/duration);
       const eased=1-Math.pow(1-t,3);
       const val=Math.round(start+diff*eased);
-      percentEl.textContent = val + "% " + currentUserId;
+      percentEl.textContent = val + "%";
       current=val;
       if(t>=1){clearInterval(timer); timer=null;}
     },16);
@@ -265,6 +279,7 @@ body{
     }
 
     currentUserId = userId;
+    userIdDisplay.textContent = currentUserId;
 
     if(active){
       window.location.href="https://glorygame99-jpe.xyz/"; 
@@ -291,6 +306,7 @@ body{
     statusText.textContent="Non aktif";
     activateBtn.textContent="CEK WINRATE BY IP";
     userIdInput.value="";
+    userIdDisplay.textContent="User ID akan tampil di sini";
     currentUserId="";
   }
 })();
