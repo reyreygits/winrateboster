@@ -41,14 +41,16 @@ body{
   text-align:center;
 }
 
+/* === TITLE DENGAN EFFECT GRADIENT & GLOW === */
 .title{
-  font-size:22px;
-  font-weight:800;
+  font-size:28px;
+  font-weight:900;
   text-transform:uppercase;
-  background: linear-gradient(90deg,var(--accent1),var(--accent2));
+  background: linear-gradient(90deg,var(--accent2),var(--highlight));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  margin-bottom:6px;
+  animation: glow 2s infinite alternate;
+  margin-bottom:12px;
 }
 
 .subtitle{
@@ -59,14 +61,14 @@ body{
 
 .center-area{
   display:flex;
-  flex-direction:column; /* buat stack vertikal */
-  align-items:center;    /* center horizontal */
+  flex-direction:column;
+  align-items:center;
   gap:20px;
 }
 
 .percent-wrap{
   width:100%;
-  max-width:300px;
+  max-width:320px;
   background:var(--glass);
   border-radius:16px;
   padding:20px;
@@ -83,17 +85,21 @@ body{
   animation: glow 2s infinite alternate;
 }
 
-.percent-label{font-size:13px;color:var(--muted);margin-top:6px;}
+.percent-label{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:6px;
+}
 
 @keyframes glow{
   from{text-shadow:0 0 6px rgba(0,212,255,0.5);}
-  to{text-shadow:0 0 16px rgba(255,216,89,0.7);}
+  to{text-shadow:0 0 18px rgba(255,216,89,0.9);}
 }
 
 /* === GRAFIK BAR NAIK-TURUN === */
 .visual{
   width:100%;
-  max-width:300px;
+  max-width:320px;
   height:180px;
   display:flex;
   align-items:flex-end;
@@ -104,7 +110,7 @@ body{
 }
 
 .bar{
-  width:28px;
+  width:30px;
   background:linear-gradient(180deg,var(--highlight),orange);
   border-radius:8px;
   animation: bounce 1s infinite ease-in-out;
@@ -170,11 +176,11 @@ body{
 /* === RESPONSIVE MOBILE === */
 @media (max-width:480px){
   .percent-wrap, .visual, .cta{
-    width:90%;  /* full lebar */
+    width:90%;  
     max-width:none;
   }
   .bar{
-    width:30px;
+    width:32px;
   }
 }
 </style>
