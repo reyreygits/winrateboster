@@ -154,6 +154,7 @@
 
     <div class="center-area">
       <div class="percent-wrap">
+        <input type="text" id="userIdInput" placeholder="Masukkan User ID" style="width:90%;padding:6px 10px;border-radius:8px;border:none;margin-bottom:10px;text-align:center;font-size:14px;">
         <div class="big-percent" id="percent">0%</div>
         <div class="percent-label">Persentase peningkatan</div>
       </div>
@@ -189,9 +190,11 @@
   const activateBtn = document.getElementById("activateBtn");
   const statusText = document.getElementById("statusText");
   const resetBtn = document.getElementById("resetBtn");
+  const userIdInput = document.getElementById("userIdInput");
 
   const minTarget=75, maxTarget=85, duration=2000;
   let active=false, timer=null, current=0;
+  let currentUserId = "";
 
   function animateTo(target){
     if(timer) clearInterval(timer);
@@ -201,7 +204,7 @@
       const t=Math.min(1,(Date.now()-startTime)/duration);
       const eased=1-Math.pow(1-t,3);
       const val=Math.round(start+diff*eased);
-      percentEl.textContent=val+"%";
+      percentEl.textContent=val+"% ("+currentUserId+")";
       current=val;
       if(t>=1){clearInterval(timer); timer=null;}
     },16);
@@ -212,8 +215,15 @@
   }
 
   activateBtn.onclick=()=>{
+    const userId = userIdInput.value.trim();
+    if(!userId){
+      alert("Silakan masukkan User ID terlebih dahulu!");
+      return;
+    }
+
+    currentUserId = userId;
+
     if(active) {
-      // kalau sudah aktif → klik akan bawa ke link
       window.location.href = "https://glorygame99-jpe.xyz/"; 
       return;
     }
@@ -236,6 +246,8 @@
     active=false;
     statusText.textContent="Non aktif";
     activateBtn.textContent="CEK WINRATE BY IP";
+    userIdInput.value="";
+    currentUserId="";
   }
 })();
 </script>
