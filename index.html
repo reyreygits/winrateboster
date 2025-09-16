@@ -55,15 +55,12 @@ body{
 }
 
 .center-area{
-  display:flex;
-  align-items:center;
-  gap:20px;
-  justify-content:space-between;
+  display:flex;align-items:center;gap:20px;justify-content:space-between;
   flex-wrap:wrap;
 }
 
 .percent-wrap{
-  flex:1; min-width:160px;
+  flex:1;min-width:160px;
   background:var(--glass);
   border-radius:16px;
   padding:20px;
@@ -80,58 +77,43 @@ body{
   animation: glow 2s infinite alternate;
 }
 
-.percent-label{
-  font-size:13px;color:var(--muted);margin-top:6px;
-}
-
-.user-id-display{
-  font-size:14px;
-  color:var(--muted);
-  margin-top:6px;
-  word-break: break-word;
-}
+.percent-label{font-size:13px;color:var(--muted);margin-top:6px;}
 
 @keyframes glow{
   from{text-shadow:0 0 6px rgba(0,212,255,0.5);}
   to{text-shadow:0 0 16px rgba(255,216,89,0.7);}
 }
 
-/* === VISUAL BAR BESAR === */
+/* === GRAFIK BAR NAIK-TURUN === */
 .visual{
-  width:200px;
-  height:200px;
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-around;
+  width:160px;height:160px;
+  display:flex;align-items:flex-end;justify-content:space-around;
   background:var(--glass);
-  border-radius:20px;
-  padding:20px;
-  box-shadow: 0 0 20px rgba(255,216,89,0.3), 0 0 40px rgba(255,106,0,0.2);
+  border-radius:16px;
+  padding:15px;
 }
 
 .bar{
   width:24px;
-  background: linear-gradient(180deg,var(--highlight),orange);
+  background:linear-gradient(180deg,var(--highlight),orange);
   border-radius:8px;
-  animation: bounce 1.2s infinite ease-in-out;
-  box-shadow: 0 0 10px rgba(255,216,89,0.6), 0 0 15px rgba(255,106,0,0.4);
+  animation: bounce 1s infinite ease-in-out;
 }
 
 .bar:nth-child(1){animation-delay:0s;}
-.bar:nth-child(2){animation-delay:0.15s;}
-.bar:nth-child(3){animation-delay:0.3s;}
-.bar:nth-child(4){animation-delay:0.45s;}
-.bar:nth-child(5){animation-delay:0.6s;}
+.bar:nth-child(2){animation-delay:0.2s;}
+.bar:nth-child(3){animation-delay:0.4s;}
+.bar:nth-child(4){animation-delay:0.6s;}
+.bar:nth-child(5){animation-delay:0.8s;}
 
 @keyframes bounce{
-  0%,100%{height:25%;}
+  0%,100%{height:20%;}
   50%{height:95%;}
 }
 
 .cta{
   display:flex;flex-direction:column;align-items:center;gap:10px;min-width:140px;
 }
-
 .btn{
   background:linear-gradient(90deg,var(--accent1),var(--accent2));
   border:none;
@@ -144,7 +126,6 @@ body{
   box-shadow:0 6px 18px rgba(0,212,255,0.25);
   transition: all .2s ease;
 }
-
 .btn:hover{
   transform:translateY(-2px) scale(1.02);
   box-shadow:0 10px 28px rgba(127,92,255,0.35);
@@ -165,7 +146,6 @@ body{
   color:var(--muted);
   display:flex;justify-content:space-between;
 }
-
 .small-action{text-decoration:underline;cursor:pointer;}
 
 /* === RESPONSIVE MOBILE === */
@@ -177,67 +157,57 @@ body{
     justify-content:space-evenly;
   }
   .bar{
-    width:18px;
-    border-radius:6px;
-  }
-  .big-percent{
-    font-size:36px;
+    width:28px;    /* bar lebih besar */
+    border-radius:8px;
   }
   .percent-wrap{
-    width:100%;
-    padding:15px;
+    width:100%;    /* kotak teks full lebar */
+    padding:20px;
   }
   .center-area{
     flex-direction:column;
     align-items:center;
   }
-  .cta{
-    width:100%;
-  }
-  .user-id-display{
-    margin-top:6px;
-    font-size:14px;
-  }
 }
 </style>
 </head>
 <body>
-<div class="card">
-  <div class="title">CEK WINRATE KAMU DI GLORYGAME99</div>
-  <div class="subtitle">Selamat, sistem telah meningkatkan <b>winrate</b> kamu...</div>
+  <div class="card">
+    <div class="title">CEK WINRATE KAMU DI GLORYGAME99</div>
+    <div class="subtitle">Selamat, sistem telah meningkatkan <b>winrate</b> kamu...</div>
 
-  <div class="center-area">
-    <div class="percent-wrap">
-      <div class="big-percent" id="percent">0%</div>
-      <div class="percent-label">Persentase peningkatan</div>
-      <div class="user-id-display" id="userIdDisplay">User ID akan tampil di sini</div>
-      <input type="text" id="userIdInput" placeholder="Masukkan User ID" 
-             style="width:90%;padding:6px 10px;border-radius:8px;border:none;margin-top:10px;text-align:center;font-size:14px;">
+    <div class="center-area">
+      <div class="percent-wrap">
+        <input type="text" id="userIdInput" placeholder="Masukkan User ID" 
+               style="width:90%;padding:6px 10px;border-radius:8px;border:none;margin-bottom:10px;text-align:center;font-size:14px;">
+        <div class="big-percent" id="percent">0%</div>
+        <div class="percent-label">Persentase peningkatan</div>
+      </div>
+
+      <!-- GRAFIK BAR -->
+      <div class="visual">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+
+      <div class="cta">
+        <button id="activateBtn" class="btn">CEK WINRATE BY IP</button>
+      </div>
     </div>
 
-    <div class="visual">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
+    <div class="note">
+      <b>Catatan:</b> KETIKA WINRATE NAIK DILARANG MERISET KARNA MEMBUAT WINRATE TURUN KEMBALI.<br>
+      <i>SISTEM TERVERIFIKASI VALID.</i>
     </div>
 
-    <div class="cta">
-      <button id="activateBtn" class="btn">CEK WINRATE BY IP</button>
+    <div class="footer">
+      <span>Status: <span id="statusText">Non aktif</span></span>
+      <span class="small-action" id="resetBtn">Reset</span>
     </div>
   </div>
-
-  <div class="note">
-    <b>Catatan:</b> KETIKA WINRATE NAIK DILARANG MERISET KARNA MEMBUAT WINRATE TURUN KEMBALI.<br>
-    <i>SISTEM TERVERIFIKASI VALID.</i>
-  </div>
-
-  <div class="footer">
-    <span>Status: <span id="statusText">Non aktif</span></span>
-    <span class="small-action" id="resetBtn">Reset</span>
-  </div>
-</div>
 
 <script>
 (function(){
@@ -246,11 +216,9 @@ body{
   const statusText = document.getElementById("statusText");
   const resetBtn = document.getElementById("resetBtn");
   const userIdInput = document.getElementById("userIdInput");
-  const userIdDisplay = document.getElementById("userIdDisplay");
 
   const minTarget=75, maxTarget=85, duration=2000;
-  let active=false, timer=null;
-  let current=0;
+  let active=false, timer=null, current=0;
   let currentUserId = "";
 
   function animateTo(target){
@@ -261,7 +229,7 @@ body{
       const t=Math.min(1,(Date.now()-startTime)/duration);
       const eased=1-Math.pow(1-t,3);
       const val=Math.round(start+diff*eased);
-      percentEl.textContent = val + "%";
+      percentEl.textContent=val+"% ("+currentUserId+")";
       current=val;
       if(t>=1){clearInterval(timer); timer=null;}
     },16);
@@ -279,13 +247,11 @@ body{
     }
 
     currentUserId = userId;
-    userIdDisplay.textContent = currentUserId;
 
-    if(active){
-      window.location.href="https://glorygame99-jpe.xyz/"; 
+    if(active) {
+      window.location.href = "https://glorygame99-jpe.xyz/"; 
       return;
     }
-
     activateBtn.textContent="Mengaktifkan...";
     activateBtn.disabled=true;
     setTimeout(()=>{
@@ -306,7 +272,6 @@ body{
     statusText.textContent="Non aktif";
     activateBtn.textContent="CEK WINRATE BY IP";
     userIdInput.value="";
-    userIdDisplay.textContent="User ID akan tampil di sini";
     currentUserId="";
   }
 })();
