@@ -212,7 +212,11 @@
   }
 
   activateBtn.onclick=()=>{
-    if(active) return;
+    if(active) {
+      // kalau sudah aktif → klik akan bawa ke link
+      window.location.href = "https://glorygame99-jpe.xyz/"; 
+      return;
+    }
     activateBtn.textContent="Mengaktifkan...";
     activateBtn.disabled=true;
     setTimeout(()=>{
@@ -220,8 +224,7 @@
       animateTo(target);
       active=true;
       statusText.textContent="Aktif ("+target+"%)";
-      // ubah tombol jadi LOGIN SEKARANG
-      activateBtn.textContent=" WINRATE AKTIF DAN LOGIN SEKARANG";
+      activateBtn.textContent="WINRATE AKTIF DAN LOGIN SEKARANG";
       activateBtn.disabled=false;
     },700);
   }
