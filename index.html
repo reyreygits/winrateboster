@@ -3,279 +3,237 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Winrate Upgrade - Demo</title>
+<title>Winrate Upgrade - Modern</title>
 <style>
   :root{
-    --bg:#0b0710;
-    --panel:#1b1422;
-    --accent:#8b4bd7; /* purple button */
-    --accent-2:#6f2bd9;
-    --text:#f5f5f7;
-    --muted:#cfcbe0;
-    --highlight:#ffdd57; /* chart highlight */
-    --glass: rgba(255,255,255,0.04);
+    --bg: #0a0f1c;
+    --panel: rgba(255,255,255,0.05);
+    --accent1: #7f5cff; 
+    --accent2: #00d4ff;
+    --text: #f9f9fb;
+    --muted: #9aa0b8;
+    --highlight: #ffd859;
+    --glass: rgba(255,255,255,0.08);
   }
 
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
   body{
-    background:
-      radial-gradient(ellipse at 30% 10%, rgba(113,63,191,0.18) 0%, transparent 15%),
-      linear-gradient(180deg,#05040a 0%, #0b0710 100%);
+    margin:0;
+    font-family:"Poppins",system-ui,Roboto,sans-serif;
+    background: linear-gradient(135deg,#0a0f1c,#11182b);
+    min-height:100vh;
     display:flex;align-items:center;justify-content:center;
     color:var(--text);
   }
 
-  /* modal card */
   .card{
-    width: min(540px, 92vw);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:14px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-    padding:26px;
+    width:min(520px,90vw);
+    padding:28px;
+    border-radius:20px;
+    background:var(--panel);
+    backdrop-filter: blur(16px);
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 30px rgba(0,212,255,0.15), 0 0 50px rgba(127,92,255,0.1);
     position:relative;
     overflow:hidden;
-    border: 1px solid rgba(255,255,255,0.03);
   }
 
-  /* subtle decorative neon lines */
-  .card::before{
-    content:"";
-    position:absolute; inset:0;
-    background:
-      radial-gradient(circle at 10% 10%, rgba(111,43,217,0.08), transparent 8%),
-      radial-gradient(circle at 85% 75%, rgba(139,75,215,0.06), transparent 12%);
-    pointer-events:none;
-  }
-
-  .header{
-    display:flex;align-items:center;gap:12px;
-  }
   .title{
+    font-size:22px;
     font-weight:800;
-    letter-spacing:0.6px;
-    font-size:18px;
     text-transform:uppercase;
+    background: linear-gradient(90deg,var(--accent1),var(--accent2));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:6px;
   }
 
   .subtitle{
-    margin-top:6px;color:var(--muted);font-size:13px;line-height:1.3;
+    font-size:14px;
+    color:var(--muted);
+    margin-bottom:18px;
   }
 
   .center-area{
-    display:flex;align-items:center;gap:18px;margin-top:18px;
-    justify-content:space-between;
+    display:flex;align-items:center;gap:20px;justify-content:space-between;
+    flex-wrap:wrap;
   }
 
   .percent-wrap{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:10px;padding:18px 20px;flex:1;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    min-width:170px;
-    box-shadow: 0 6px 20px rgba(111,43,217,0.08);
+    flex:1;min-width:160px;
+    background:var(--glass);
+    border-radius:16px;
+    padding:20px;
     text-align:center;
+    box-shadow: inset 0 0 12px rgba(127,92,255,0.2);
   }
   .big-percent{
-    font-size:44px;font-weight:900;
-    color:var(--text);
-    letter-spacing:1px;
+    font-size:48px;
+    font-weight:900;
+    background: linear-gradient(90deg,var(--accent2),var(--highlight));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: glow 2s infinite alternate;
   }
-  .percent-label{font-size:12px;color:var(--muted);margin-top:6px;}
+  .percent-label{font-size:13px;color:var(--muted);margin-top:6px;}
+
+  @keyframes glow{
+    from{text-shadow:0 0 6px rgba(0,212,255,0.5);}
+    to{text-shadow:0 0 16px rgba(255,216,89,0.7);}
+  }
 
   .visual{
-    width:150px;height:150px;border-radius:12px;
+    width:140px;height:140px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:radial-gradient(circle at center,var(--accent1)20%,transparent 70%);
+    box-shadow: 0 0 25px rgba(127,92,255,0.4), inset 0 0 15px rgba(0,212,255,0.2);
+  }
+
+  .ring{
+    width:100px;height:100px;
+    border-radius:50%;
+    border:3px solid rgba(255,255,255,0.1);
     display:flex;align-items:center;justify-content:center;
     position:relative;
-    background: linear-gradient(180deg, rgba(139,75,215,0.06), rgba(111,43,217,0.03));
-    box-shadow: inset 0 2px 0 rgba(255,255,255,0.02), 0 8px 28px rgba(111,43,217,0.06);
-    flex-shrink:0;
+    animation: spin 10s linear infinite;
   }
 
-  /* simple ring + chart icon */
-  .ring{
-    width:110px;height:110px;border-radius:50%;
-    border:2px solid rgba(255,255,255,0.04);
-    position:relative;display:flex;align-items:center;justify-content:center;
+  @keyframes spin{from{transform:rotate(0);}to{transform:rotate(360deg);}}
+
+  .chart .bar{
+    width:12px;position:absolute;bottom:0;
+    background:linear-gradient(180deg,var(--highlight),orange);
+    border-radius:4px;
   }
-  .chart{
-    width:62px;height:62px;position:relative;
-  }
-  .chart .bar{position:absolute;bottom:0;width:14px;background:linear-gradient(180deg,var(--highlight),#f3b81a);border-radius:3px;left:0}
-  .chart .bar.b1{left:0;height:28px}
-  .chart .bar.b2{left:18px;height:38px}
-  .chart .bar.b3{left:36px;height:46px}
-  .chart .spark{position:absolute;right:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:rgba(111,43,217,0.9);box-shadow:0 0 12px rgba(111,43,217,0.9)}
+  .bar.b1{height:30px;left:0}
+  .bar.b2{height:50px;left:20px}
+  .bar.b3{height:70px;left:40px}
 
   .cta{
-    margin-left:18px;display:flex;flex-direction:column;align-items:center;gap:8px;
+    display:flex;flex-direction:column;align-items:center;gap:10px;min-width:140px;
   }
   .btn{
-    background: linear-gradient(180deg,var(--accent),var(--accent-2));
-    padding:12px 18px;border-radius:10px;color:white;font-weight:800;border:none;
-    cursor:pointer;font-size:14px;box-shadow:0 8px 18px rgba(111,43,217,0.18);
-    transition: transform .12s ease, box-shadow .12s;
+    background:linear-gradient(90deg,var(--accent1),var(--accent2));
+    border:none;
+    padding:14px 22px;
+    border-radius:12px;
+    color:white;
+    font-weight:700;
+    font-size:14px;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,212,255,0.25);
+    transition: all .2s ease;
   }
-  .btn:active{transform:translateY(1px)}
-  .btn[disabled]{opacity:0.6;cursor:not-allowed;transform:none}
+  .btn:hover{
+    transform:translateY(-2px) scale(1.02);
+    box-shadow:0 10px 28px rgba(127,92,255,0.35);
+  }
 
   .note{
-    margin-top:12px;font-size:12px;color:var(--muted);line-height:1.3;
-    background:var(--glass);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)
+    margin-top:20px;
+    font-size:12px;
+    color:var(--muted);
+    padding:10px;
+    border-radius:10px;
+    background:rgba(255,255,255,0.04);
   }
 
-  /* small footer row */
-  .footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:12px;color:var(--muted);}
-  .small-action{color:var(--muted);text-decoration:underline;cursor:pointer}
-
-  /* responsive */
-  @media (max-width:560px){
-    .center-area{flex-direction:column;gap:12px}
-    .visual{width:120px;height:120px}
+  .footer{
+    margin-top:14px;
+    font-size:12px;
+    color:var(--muted);
+    display:flex;justify-content:space-between;
   }
+  .small-action{text-decoration:underline;cursor:pointer;}
 </style>
 </head>
 <body>
+  <div class="card">
+    <div class="title">WINRATE DI-UPGRADE!</div>
+    <div class="subtitle">Selamat, sistem telah meningkatkan <b>winrate</b> kamu...</div>
 
-<div class="card" role="dialog" aria-labelledby="win-title" aria-describedby="win-note">
-  <div class="header">
-    <div class="title" id="win-title">WINRATE DI-UPGRADE!</div>
-  </div>
+    <div class="center-area">
+      <div class="percent-wrap">
+        <div class="big-percent" id="percent">0%</div>
+        <div class="percent-label">Persentase peningkatan</div>
+      </div>
 
-  <div class="subtitle" id="win-sub">
-    Selamat, sistem telah meningkatkan <strong>winrate</strong> kamu... 
-  </div>
-
-  <div class="center-area">
-    <div class="percent-wrap" aria-live="polite">
-      <div class="big-percent" id="percent">0%</div>
-      <div class="percent-label">Persentase peningkatan</div>
-    </div>
-
-    <div class="visual" aria-hidden="true">
-      <div class="ring">
-        <div class="chart" aria-hidden="true">
-          <div class="bar b1"></div>
-          <div class="bar b2"></div>
-          <div class="bar b3"></div>
+      <div class="visual">
+        <div class="ring">
+          <div class="chart">
+            <div class="bar b1"></div>
+            <div class="bar b2"></div>
+            <div class="bar b3"></div>
+          </div>
         </div>
-        <div class="spark" style="transform: translate(36px,-50px)"></div>
+      </div>
+
+      <div class="cta">
+        <button id="activateBtn" class="btn">AKTIFKAN WINRATE</button>
       </div>
     </div>
 
-    <div class="cta">
-      <button id="activateBtn" class="btn" aria-pressed="false">AKTIFKAN WINRATE</button>
-      <div style="font-size:12px;color:var(--muted);text-align:center;max-width:140px">
-        Catatan: Perubahan bersifat <strong>dinamis</strong> mengikuti algoritma permainan.
-      </div>
+    <div class="note">
+      <b>Catatan:</b> Perubahan bersifat dinamis mengikuti algoritma permainan.<br>
+      <i>Versi demo — hanya simulasi UI.</i>
+    </div>
+
+    <div class="footer">
+      <span>Status: <span id="statusText">Non aktif</span></span>
+      <span class="small-action" id="resetBtn">Reset</span>
     </div>
   </div>
-
-  <div class="note" id="win-note">
-    <strong>Catatan:</strong> Perubahan bersifat dinamis mengikuti algoritma permainan.
-    <div style="margin-top:6px;font-size:11px;color:var(--muted)">Versi demo — ini hanya simulasi tampilan UI.</div>
-  </div>
-
-  <div class="footer">
-    <div>Status: <span id="statusText">Non aktif</span></div>
-    <div class="small-action" id="resetBtn">Reset</div>
-  </div>
-</div>
 
 <script>
-/*
-  Demo script untuk mengontrol angka persen dan tombol.
-  - Klik "AKTIFKAN WINRATE" untuk mensimulasikan upgrade.
-  - Reset mengembalikan ke 0.
-  - Kamu bisa ubah targetPercent / animationDuration di bawah.
-*/
-
 (function(){
-  const percentEl = document.getElementById('percent');
-  const activateBtn = document.getElementById('activateBtn');
-  const statusText = document.getElementById('statusText');
-  const resetBtn = document.getElementById('resetBtn');
+  const percentEl = document.getElementById("percent");
+  const activateBtn = document.getElementById("activateBtn");
+  const statusText = document.getElementById("statusText");
+  const resetBtn = document.getElementById("resetBtn");
 
-  // KONFIGURASI: ubah sesuai kebutuhan
-  const minTarget = 10; // minimal persen yang bisa muncul
-  const maxTarget = 75; // maksimal persen simulasi
-  const animationDuration = 1800; // ms durasi animasi naik persen
-
-  let currentPercent = 0;
-  let animTimer = null;
-  let active = false;
+  const minTarget=20, maxTarget=90, duration=2000;
+  let active=false, timer=null, current=0;
 
   function animateTo(target){
-    if(animTimer) clearInterval(animTimer);
-    const start = currentPercent;
-    const diff = target - start;
-    const startTime = Date.now();
-    const duration = animationDuration;
-    animTimer = setInterval(()=>{
-      const t = Math.min(1, (Date.now() - startTime)/duration);
-      // ease out cubic
-      const eased = 1 - Math.pow(1 - t, 3);
-      const value = Math.round(start + diff * eased);
-      setPercent(value);
-      if(t >= 1){
-        clearInterval(animTimer);
-        animTimer = null;
-      }
-    }, 16);
-  }
-
-  function setPercent(v){
-    currentPercent = v;
-    percentEl.textContent = (v|0) + '%';
+    if(timer) clearInterval(timer);
+    const start=current, diff=target-start;
+    const startTime=Date.now();
+    timer=setInterval(()=>{
+      const t=Math.min(1,(Date.now()-startTime)/duration);
+      const eased=1-Math.pow(1-t,3);
+      const val=Math.round(start+diff*eased);
+      percentEl.textContent=val+"%";
+      current=val;
+      if(t>=1){clearInterval(timer); timer=null;}
+    },16);
   }
 
   function getRandomTarget(){
-    // jika ingin target deterministic, ubah logika di sini
-    return Math.floor(Math.random() * (maxTarget - minTarget + 1)) + minTarget;
+    return Math.floor(Math.random()*(maxTarget-minTarget+1))+minTarget;
   }
 
-  activateBtn.addEventListener('click', ()=>{
-    if(active) return; // sudah aktif
-    activateBtn.disabled = true;
-    activateBtn.textContent = 'Mengaktifkan...';
-    // simulasi delay kecil sebelum muncul angka
+  activateBtn.onclick=()=>{
+    if(active) return;
+    activateBtn.textContent="Mengaktifkan...";
+    activateBtn.disabled=true;
     setTimeout(()=>{
-      const target = getRandomTarget();
+      const target=getRandomTarget();
       animateTo(target);
-      active = true;
-      activateBtn.textContent = 'AKTIF'; // state berubah
-      activateBtn.setAttribute('aria-pressed','true');
-      statusText.textContent = 'Aktif (' + target + '%)';
-      activateBtn.disabled = false;
-      // opsional: beri efek visual singkat
-      flashAccent();
-    }, 700);
-  });
-
-  resetBtn.addEventListener('click', ()=>{
-    if(animTimer) { clearInterval(animTimer); animTimer = null; }
-    setPercent(0);
-    active = false;
-    activateBtn.setAttribute('aria-pressed','false');
-    activateBtn.textContent = 'AKTIFKAN WINRATE';
-    statusText.textContent = 'Non aktif';
-  });
-
-  function flashAccent(){
-    const btn = activateBtn;
-    const origin = btn.style.boxShadow;
-    btn.style.transform = 'scale(1.02)';
-    setTimeout(()=>{ btn.style.transform = ''; }, 220);
+      active=true;
+      statusText.textContent="Aktif ("+target+"%)";
+      activateBtn.textContent="AKTIF";
+      activateBtn.disabled=false;
+    },700);
   }
 
-  // inisialisasi
-  setPercent(0);
-
-  // OPTIONAL: auto-pulse kecil untuk menarik perhatian (non-intrusive)
-  (function pulse(){
-    const el = document.querySelector('.visual');
-    if(!el) return;
-    el.animate([{transform:'scale(1)'},{transform:'scale(1.02)'},{transform:'scale(1)'}],{duration:4200,iterations:Infinity});
-  })();
-
+  resetBtn.onclick=()=>{
+    if(timer) clearInterval(timer);
+    current=0;
+    percentEl.textContent="0%";
+    active=false;
+    statusText.textContent="Non aktif";
+    activateBtn.textContent="AKTIFKAN WINRATE";
+  }
 })();
 </script>
 </body>
