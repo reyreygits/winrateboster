@@ -86,25 +86,25 @@ body{
   to{text-shadow:0 0 16px rgba(255,216,89,0.7);}
 }
 
-/* === GRAFIK BAR NAIK-TURUN === */
+/* === VISUAL BAR BESAR === */
 .visual{
-  width:160px;
-  height:160px;
+  width:200px;      /* diperbesar */
+  height:200px;     /* diperbesar */
   display:flex;
   align-items:flex-end;
-  justify-content:space-between;
+  justify-content:space-around;
   background:var(--glass);
-  border-radius:24px;
-  padding:15px;
+  border-radius:20px;
+  padding:20px;
   box-shadow: 0 0 20px rgba(255,216,89,0.3), 0 0 40px rgba(255,106,0,0.2);
 }
 
 .bar{
-  width:12px;
-  background: linear-gradient(180deg,#ffd859,#ff6a00);
-  border-radius:6px;
+  width:24px;      /* diperbesar */
+  background: linear-gradient(180deg,var(--highlight),orange);
+  border-radius:8px;
   animation: bounce 1.2s infinite ease-in-out;
-  box-shadow: 0 0 8px rgba(255,216,89,0.6), 0 0 12px rgba(255,106,0,0.4);
+  box-shadow: 0 0 10px rgba(255,216,89,0.6), 0 0 15px rgba(255,106,0,0.4);
 }
 
 .bar:nth-child(1){animation-delay:0s;}
@@ -158,13 +158,13 @@ body{
 /* === RESPONSIVE MOBILE === */
 @media (max-width:480px){
   .visual{
-    width:100px;
-    height:100px;
-    padding:10px;
+    width:150px;     /* tetap lebih besar dari default sebelumnya */
+    height:150px;
+    padding:15px;
   }
   .bar{
-    width:8px;
-    border-radius:4px;
+    width:16px;
+    border-radius:6px;
   }
   .big-percent{
     font-size:36px;
