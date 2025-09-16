@@ -79,7 +79,10 @@ body{
   -webkit-text-fill-color:transparent;
   animation: glow 2s infinite alternate;
 }
-.percent-label{font-size:13px;color:var(--muted);margin-top:6px;}
+
+.percent-label{
+  font-size:13px;color:var(--muted);margin-top:6px;
+}
 
 @keyframes glow{
   from{text-shadow:0 0 6px rgba(0,212,255,0.5);}
@@ -88,8 +91,8 @@ body{
 
 /* === VISUAL BAR BESAR === */
 .visual{
-  width:200px;      /* diperbesar */
-  height:200px;     /* diperbesar */
+  width:200px;
+  height:200px;
   display:flex;
   align-items:flex-end;
   justify-content:space-around;
@@ -100,7 +103,7 @@ body{
 }
 
 .bar{
-  width:24px;      /* diperbesar */
+  width:24px;
   background: linear-gradient(180deg,var(--highlight),orange);
   border-radius:8px;
   animation: bounce 1.2s infinite ease-in-out;
@@ -121,6 +124,7 @@ body{
 .cta{
   display:flex;flex-direction:column;align-items:center;gap:10px;min-width:140px;
 }
+
 .btn{
   background:linear-gradient(90deg,var(--accent1),var(--accent2));
   border:none;
@@ -133,6 +137,7 @@ body{
   box-shadow:0 6px 18px rgba(0,212,255,0.25);
   transition: all .2s ease;
 }
+
 .btn:hover{
   transform:translateY(-2px) scale(1.02);
   box-shadow:0 10px 28px rgba(127,92,255,0.35);
@@ -153,14 +158,16 @@ body{
   color:var(--muted);
   display:flex;justify-content:space-between;
 }
+
 .small-action{text-decoration:underline;cursor:pointer;}
 
 /* === RESPONSIVE MOBILE === */
 @media (max-width:480px){
   .visual{
-    width:150px;     /* tetap lebih besar dari default sebelumnya */
+    width:150px;
     height:150px;
     padding:15px;
+    justify-content:space-evenly; /* jarak bar lebih merata */
   }
   .bar{
     width:16px;
