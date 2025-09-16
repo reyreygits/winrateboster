@@ -55,12 +55,15 @@
   }
 
   .center-area{
-    display:flex;align-items:center;gap:20px;justify-content:space-between;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    justify-content:space-between;
     flex-wrap:wrap;
   }
 
   .percent-wrap{
-    flex:1;min-width:160px;
+    flex:1; min-width:160px;
     background:var(--glass);
     border-radius:16px;
     padding:20px;
@@ -84,11 +87,15 @@
   }
 
   .visual{
-    width:140px;height:140px;
-    display:flex;align-items:flex-end;justify-content:space-around;
+    width:140px;
+    height:140px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-around;
     background:var(--glass);
     border-radius:16px;
     padding:15px;
+    flex-wrap:wrap; /* responsive */
   }
 
   .bar{
@@ -145,6 +152,33 @@
     display:flex;justify-content:space-between;
   }
   .small-action{text-decoration:underline;cursor:pointer;}
+
+  /* === RESPONSIVE MOBILE === */
+  @media (max-width: 480px){
+    .visual{
+      width:100%;
+      height:100px;
+      padding:10px;
+      justify-content:space-between;
+    }
+    .bar{
+      width:12px;
+      border-radius:4px;
+    }
+    .big-percent{
+      font-size:36px;
+    }
+    .percent-wrap{
+      padding:15px;
+    }
+    .center-area{
+      flex-direction:column;
+      align-items:center;
+    }
+    .cta{
+      width:100%;
+    }
+  }
 </style>
 </head>
 <body>
@@ -193,7 +227,8 @@
   const userIdInput = document.getElementById("userIdInput");
 
   const minTarget=75, maxTarget=85, duration=2000;
-  let active=false, timer=null, current=0;
+  let active=false, timer=null;
+  let current=0;
   let currentUserId = "";
 
   function animateTo(target){
@@ -204,7 +239,6 @@
       const t=Math.min(1,(Date.now()-startTime)/duration);
       const eased=1-Math.pow(1-t,3);
       const val=Math.round(start+diff*eased);
-      // Tampilkan persen + username tanpa ()
       percentEl.textContent = val + "% " + currentUserId;
       current=val;
       if(t>=1){clearInterval(timer); timer=null;}
@@ -224,33 +258,13 @@
 
     currentUserId = userId;
 
-    if(active) {
-      window.location.href = "https://glorygame99-jpe.xyz/"; 
+    if(active){
+      window.location.href="https://glorygame99-jpe.xyz/"; 
       return;
     }
+
     activateBtn.textContent="Mengaktifkan...";
     activateBtn.disabled=true;
     setTimeout(()=>{
       const target=getRandomTarget();
       animateTo(target);
-      active=true;
-      statusText.textContent="Aktif ("+target+"%)";
-      activateBtn.textContent="WINRATE AKTIF DAN LOGIN SEKARANG";
-      activateBtn.disabled=false;
-    },700);
-  }
-
-  resetBtn.onclick=()=>{
-    if(timer) clearInterval(timer);
-    current=0;
-    percentEl.textContent="0%";
-    active=false;
-    statusText.textContent="Non aktif";
-    activateBtn.textContent="CEK WINRATE BY IP";
-    userIdInput.value="";
-    currentUserId="";
-  }
-})();
-</script>
-</body>
-</html>
